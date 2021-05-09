@@ -240,20 +240,20 @@ const tvTypeToShowFirst = document.getElementById("tvType1");
 tvTypeToShowFirst.textContent = "Tv Type: " + tvType1;
 document.body.appendChild(tvTypeToShowFirst);
 
-function tvModelTypeName(inventory){
+function tvModelTypeNameTv(inventory){
   return inventory.brand + " " + inventory.type + " - " + inventory.name;
 };
 
-function tvPrice(inventory){
-    return  "\u20AC " + inventory.price + ",-"
+function tvPriceTv(inventory){
+  return  "\u20AC " + inventory.price + ",-"
 };
 
-function getAllSizes(inventory){
+function getAllSizesTv(inventory){
   return inventory.availableSizes.map((tvSize)=> {
- return tvSize + " inch (" + (Math.round(tvSize * 2.54)) + " centimeters) "
-})};
+    return tvSize + " inch (" + (Math.round(tvSize * 2.54)) + " centimeters) "
+  })};
 
-const tvType2Name =(tvModelTypeName({
+const tvType2Name =(tvModelTypeNameTv({
   type: '50PUS7304/12',
   name: 'The One 4K TV',
   brand: 'Philips',
@@ -273,7 +273,7 @@ const tvType2Name =(tvModelTypeName({
   originalStock: 8,
   sold: 3,
 }))
-const tvType2Price = tvPrice({
+const tvType2Price = tvPriceTv({
   type: '50PUS7304/12',
   name: 'The One 4K TV',
   brand: 'Philips',
@@ -293,7 +293,7 @@ const tvType2Price = tvPrice({
   originalStock: 8,
   sold: 3,
 })
-const tvType2AvailableSizes = getAllSizes({
+const tvType2AvailableSizes = getAllSizesTv({
   type: '50PUS7304/12',
   name: 'The One 4K TV',
   brand: 'Philips',
@@ -314,7 +314,6 @@ const tvType2AvailableSizes = getAllSizes({
   sold: 3,
 }).join("|")
 
-
 const tvTypeToShowSecondName = document.getElementById("tvType2Name");
 tvTypeToShowSecondName.textContent = (tvType2Name);
 document.body.appendChild(tvTypeToShowSecondName);
@@ -327,31 +326,28 @@ const tvTypeToShowSecondSizes = document.getElementById("tvType2Sizes");
 tvTypeToShowSecondSizes.textContent = (tvType2AvailableSizes);
 document.body.appendChild(tvTypeToShowSecondSizes);
 
+const tvModelTypeName = inventory.map((tv) =>{
+  return tv.brand + " " + tv.type + " - " + tv.name;
+});
 
+const tvPrice = inventory.map((tv) => {
+  return "\u20AC " + tv.price + ",-"
+});
 
-function tvModelTypeName(inventory){
-  return inventory.brand + " " + inventory.type + " - " + inventory.name;
-};
+const tvSizes = inventory.map((tv) => {
+  let allSizes = [];
+  const tvSize = tv.availableSizes;
+  for (let i = 0; i < tvSize.length; i++) {
+    allSizes += (tvSize[i] + " inch" + " (" + tvSize[i] * 2.54 + " cm) | ");
+  }
+  return allSizes
+});
 
-function tvPrice(inventory){
-  return  "\u20AC " + inventory.price + ",-"
-};
-//
-function getAllSizes(inventory){
-  return inventory.availableSizes.map((tvSize)=> {
-    return tvSize + " inch (" + (Math.round(tvSize * 2.54)) + " centimeters) "
-  })};
+function tvDetails(array){
+  let tvDetail = [];
+  for (let i = 0; i < inventory.length; i++){
+    tvDetail += tvModelTypeName[i] + "<br>" + tvPrice[i] + "<br>" + tvSizes[i] + "<br>" + "<br>" ;
+  }return tvDetail;
+}
 
-function probeersel(inventory){
-  return inventory.map((tv) => {
-    let nameAndPrice = (tv.brand + " " + tv.type + " - " + tv.name + " ")
-    let price = "\u20AC " + tv.price + ",-" + " "
-    let availableSizes = tv.availableSizes.map((tvSize) => {
-      return tvSize + " inch (" + (Math.round(tvSize * 2.54)) + " centimeters) "
-    })
-    return nameAndPrice  + price + availableSizes
-  })}
-
-const allTvsInInventory = document.getElementById("allTvsInInventory");
-allTvsInInventory.textContent = (probeersel(inventory));
-document.body.appendChild(allTvsInInventory);
+const allTvsInInventory = document.getElementById("tvDetails").innerHTML = tvDetails(inventory);
