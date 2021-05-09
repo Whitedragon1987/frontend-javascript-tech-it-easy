@@ -5,51 +5,50 @@ p{
 }
 
 body{
-    display: grid;
-    grid-template-columns: 1fr, 1fr, 1fr;
-    grid-auto-rows: auto;
+    display: inline-grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 100px 100px auto;
+    grid-gap: 10px;
     grid-template-areas:
-    "a" "2" "3"
-    "4" "5" ""
-        "6"
-        "7"
-    "8";
-
+    "a b c h"
+    "e d . h"
+    "f . . h"
+    "g . . h";
 }
 
 #tvsInStock{
     color: red;
-    grid-area: 1;
+    grid-area: a;
 
 }
 
 #targetAmount{
     color: blue;
-    grid-area: 2;
+    grid-area: b;
 
 }
 
 #soldSoFar{
     color: green;
-    grid-area: 3;
+    grid-area: c;
 }
 
 #tvType1{
-    grid-area: 4;
+    grid-area: d;
 }
 
 #tvType2Name{
-    grid-area: 5;
+    grid-area: e;
 }
 
 #tvType2Price{
-    grid-area: 6;
+    grid-area: f;
 }
 
 #tvType2Sizes{
-    grid-area: 7;
+    grid-area: g;
 }
 
 #allTvsInInventory{
-    grid-area: 8;
+    grid-area: i;
 }
