@@ -6,14 +6,17 @@ p{
 
 body{
     display: inline-grid;
-    grid-template-columns: 200px 200px 200px;
-    grid-template-rows: 100px 100px 100px auto;
+    grid-template-columns: 200px auto;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px auto;
     grid-gap: 10px;
     grid-template-areas:
-    "a b c h"
-    "e d . h"
-    "f . . h"
-    "g . . h";
+    "a h"
+    "b h"
+    "c h"
+    "d h"
+    "e h"
+    "f h"
+    "g .";
 }
 
 #tvsInStock{
