@@ -2,13 +2,14 @@ p{
     font-family: "Segoe UI Symbol";
     border: 2px solid black;
     padding: 10px;
+    background-color: lightblue;
 }
 
 body{
     display: inline-grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 250px auto;
     grid-template-rows: 100px 100px 100px 100px 100px 100px auto;
-    grid-gap: 10px;
+    grid-column-gap: 50px;
     grid-template-areas:
     "a h"
     "b h"
@@ -17,6 +18,7 @@ body{
     "e h"
     "f h"
     "g .";
+    background-color: black;
 }
 
 #tvsInStock{
@@ -52,6 +54,30 @@ body{
     grid-area: g;
 }
 
-#allTvsInInventory{
-    grid-area: i;
+#tvDetails{
+    grid-area: h;
+}
+
+#default{
+    width: 150px;
+    height: 50px;
+    background-color: green;
+}
+
+#price{
+    width: 150px;
+    height: 50px;
+    background-color: yellow;
+}
+
+#ambilight{
+    width: 150px;
+    height: 50px;
+    background-color: beige;
+}
+
+#soldOut{
+    width: 150px;
+    height: 50px;
+    background-color: darkred;
 }

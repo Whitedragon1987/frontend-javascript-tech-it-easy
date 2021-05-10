@@ -190,7 +190,7 @@ const tvAmbilight = inventory.filter((inventory) => {
   return (inventory.options.ambiLight === true);
 });
 
-const tvsSortedOnPrice = inventory.sort((a,b) => {
+const tvsSortedOnPrice = (inventory.slice()).sort((a,b) => {
   if (a.price > b.price) {
     return 1;
   }
@@ -326,28 +326,67 @@ const tvTypeToShowSecondSizes = document.getElementById("tvType2Sizes");
 tvTypeToShowSecondSizes.textContent = (tvType2AvailableSizes);
 document.body.appendChild(tvTypeToShowSecondSizes);
 
-const tvModelTypeName = inventory.map((tv) =>{
-  return tv.brand + " " + tv.type + " - " + tv.name;
-});
+function getTvModelTypeName(array) {
+    const tvModelTypeName = (array).map((tv) => {
+        return tv.brand + " " + tv.type + " - " + tv.name;
+    })
+    return tvModelTypeName
+};
 
-const tvPrice = inventory.map((tv) => {
-  return "\u20AC " + tv.price + ",-"
-});
+function getTvPrice(array) {
+    const tvPrice = (array).map((tv) => {
+        return "\u20AC " + tv.price + ",-"
+    })
+    return tvPrice
+};
 
-const tvSizes = inventory.map((tv) => {
-  let allSizes = [];
-  const tvSize = tv.availableSizes;
-  for (let i = 0; i < tvSize.length; i++) {
-    allSizes += (tvSize[i] + " inch" + " (" + tvSize[i] * 2.54 + " cm) | ");
-  }
-  return allSizes
-});
+function getTvSizes(array) {
+    const tvSizes = inventory.map((tv) => {
+        let allSizes = [];
+        const tvSize = tv.availableSizes;
+        for (let i = 0; i < tvSize.length; i++) {
+            allSizes += (tvSize[i] + " inch" + " (" + tvSize[i] * 2.54 + " cm) | ");
+        }
+        return allSizes
+    })
+    return tvSizes
+};
 
 function tvDetails(array){
   let tvDetail = [];
-  for (let i = 0; i < inventory.length; i++){
-    tvDetail += tvModelTypeName[i] + "<br>" + tvPrice[i] + "<br>" + tvSizes[i] + "<br>" + "<br>" ;
-  }return tvDetail;
+  for (let i = 0; i < (array).length; i++){
+      tvDetail += getTvModelTypeName(array)[i] + "<br>" + getTvPrice(array) [i] + "<br>" + getTvSizes(array)[i] + "<br>" + "<br>" ;
+  }
+ return tvDetail;
 }
 
-const allTvsInInventory = document.getElementById("tvDetails").innerHTML = tvDetails(inventory);
+function allTvsButton() {
+    const allTvsInInventory = document.getElementById("tvDetails").innerHTML = tvDetails(inventory);
+}
+
+const buttonDefault = document.getElementById("default");
+buttonDefault.addEventListener('click', allTvsButton);
+
+function priceSortedButton() {
+    const allTvsSorted = document.getElementById("tvDetails").innerHTML = tvDetails(tvsSortedOnPrice);
+}
+
+const buttonPriceSorted = document.getElementById("price");
+buttonPriceSorted.addEventListener('click', priceSortedButton);
+
+function ambilightTvButton() {
+    const ambilightTvs = document.getElementById("tvDetails").innerHTML = tvDetails(tvAmbilight);
+}
+
+const buttonAmbilight = document.getElementById("ambilight");
+buttonAmbilight.addEventListener('click', ambilightTvButton);
+
+
+function soldOutButton() {
+    const allTvsSoldOut = document.getElementById("tvDetails").innerHTML = tvDetails(tvsSoldOut);
+}
+
+const buttonSoldOut = document.getElementById("soldOut");
+buttonSoldOut.addEventListener('click', soldOutButton);
+
+
